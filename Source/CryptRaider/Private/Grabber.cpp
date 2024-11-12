@@ -31,11 +31,22 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
+	
+	
+	
+
+	
+	
+}
+void UGrabber::Release()
+{
+	UE_LOG(LogTemp, Display, TEXT("Releasing grabber"));
+}
+void UGrabber::Grab()
+{
 	FVector StartLine = GetComponentLocation();
 	FVector EndLine = StartLine + GetForwardVector() * MaxGrabDistance;
-	
 	DrawDebugLine(GetWorld(), StartLine, EndLine, FColor::Red, false);
-
 	FCollisionShape SphereCollision = FCollisionShape::MakeSphere(GrabRadius);
 	FHitResult HitResult;
 	bool HasHit = GetWorld()->SweepSingleByChannel(
