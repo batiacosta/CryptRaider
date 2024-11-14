@@ -43,7 +43,9 @@ AActor* UTriggerComponent::GetAdmittedActor() const
 	for(AActor* OverlappingActor : OverlappingActors)
 	{
 		FString OverlappingActorName = OverlappingActor->GetName();
-		if (OverlappingActor->ActorHasTag(AdmittedTag))
+		bool HasAdmittedTag = OverlappingActor->ActorHasTag(AdmittedTag);
+		bool IsGrabbed = OverlappingActor->ActorHasTag("Grabbed");
+		if (HasAdmittedTag && !IsGrabbed)
 		{
 			return OverlappingActor;
 		}

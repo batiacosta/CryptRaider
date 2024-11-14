@@ -28,28 +28,25 @@ void UGrabber::BeginPlay()
 void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+	
 	UPhysicsHandleComponent* PhysicsHandle = GetPhysicsHandle();
-	if(PhysicsHandle == nullptr) return;
-
-	if(PhysicsHandle->GetGrabbedComponent() != nullptr)
-	{
-		FVector TargetLocation = GetComponentLocation() + GetForwardVector() * HoldDistance;
-		PhysicsHandle->SetTargetLocationAndRotation(TargetLocation, GetComponentRotation());
-	}
+	if(PhysicsHandle == nullptr || PhysicsHandle->GetGrabbedComponent() == nullptr) return;
+	
+	FVector TargetLocation = GetComponentLocation() + GetForwardVector() * HoldDistance;
+	PhysicsHandle->SetTargetLocationAndRotation(TargetLocation, GetComponentRotation());
 	
 }
 
 void UGrabber::Release()
 {
 	UPhysicsHandleComponent* PhysicsHandle = GetPhysicsHandle();
-	if(PhysicsHandle == nullptr) return;
-	if (PhysicsHandle->GetGrabbedComponent() == nullptr) return;
+	if(PhysicsHandle == nullptr || PhysicsHandle->GetGrabbedComponent() == nullptr) return;
 	
 	if (IsGrabbing)
 	{
 		PhysicsHandle->GetGrabbedComponent()->WakeAllRigidBodies();
+		PhysicsHandle->GetGrabbedComponent()->GetOwner()->Tags.Remove("Grabbed");
 		PhysicsHandle->ReleaseComponent();
-		UE_LOG(LogTemp, Display, TEXT("Releasing grabber"));
 		IsGrabbing = false;
 	}
 	
@@ -65,6 +62,7 @@ void UGrabber::Grab()
 	{
 		UPrimitiveComponent* HitComponent = HitResult.GetComponent();
 		HitComponent->WakeAllRigidBodies();
+		HitResult.GetActor()->Tags.Add("Grabbed");
 		PhysicsHandle->GrabComponentAtLocationWithRotation(
 			HitComponent,
 			NAME_None,
@@ -72,10 +70,6 @@ void UGrabber::Grab()
 			GetComponentRotation()
 		);
 		IsGrabbing = true;
-	}
-	else
-	{
-		UE_LOG(LogTemp, Display, TEXT("No actor hit"));
 	}
 }
 bool UGrabber::GetGrabbableInReach(FHitResult& OutHitResult) const
