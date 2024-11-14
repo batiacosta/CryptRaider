@@ -18,13 +18,18 @@ void UTriggerComponent::TickComponent(float DeltaTime, ELevelTick TickType,FActo
 	AActor* OverlappingActor = GetAdmittedActor();
 	if (OverlappingActor != nullptr)
 	{
+		UPrimitiveComponent* Component =  Cast<UPrimitiveComponent>(OverlappingActor->GetRootComponent());
+		if(Component != nullptr)
+		{
+			Component->SetSimulatePhysics(false);
+		}
+		OverlappingActor->AttachToComponent(this, FAttachmentTransformRules::KeepWorldTransform);
 		Mover->SetShouldMove(true);
 	}
 	else
 	{
 		Mover->SetShouldMove(false);
 	}
-	// Checking if missed key chain
 }
 void UTriggerComponent::SetMover(UMover* ComingMover)
 {
