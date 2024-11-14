@@ -24,6 +24,7 @@ void UTriggerComponent::TickComponent(float DeltaTime, ELevelTick TickType,FActo
 	{
 		Mover->SetShouldMove(false);
 	}
+	// Checking if missed key chain
 }
 void UTriggerComponent::SetMover(UMover* ComingMover)
 {
