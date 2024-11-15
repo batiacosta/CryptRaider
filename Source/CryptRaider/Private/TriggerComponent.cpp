@@ -28,6 +28,7 @@ void UTriggerComponent::TickComponent(float DeltaTime, ELevelTick TickType,FActo
 	}
 	else
 	{
+		if(Mover == nullptr) return;
 		Mover->SetShouldMove(false);
 	}
 }
