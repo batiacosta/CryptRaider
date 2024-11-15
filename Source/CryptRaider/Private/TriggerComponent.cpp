@@ -16,6 +16,7 @@ void UTriggerComponent::TickComponent(float DeltaTime, ELevelTick TickType,FActo
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFuntion);
 	if(Mover == nullptr) return;
+	
 	AActor* OverlappingActor = GetAdmittedActor();
 	if (OverlappingActor != nullptr)
 	{
