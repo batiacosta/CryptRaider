@@ -15,6 +15,7 @@ void UTriggerComponent::BeginPlay()
 void UTriggerComponent::TickComponent(float DeltaTime, ELevelTick TickType,FActorComponentTickFunction* ThisTickFuntion)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFuntion);
+	if(Mover == nullptr) return;
 	AActor* OverlappingActor = GetAdmittedActor();
 	if (OverlappingActor != nullptr)
 	{
@@ -32,7 +33,7 @@ void UTriggerComponent::TickComponent(float DeltaTime, ELevelTick TickType,FActo
 		Mover->SetShouldMove(false);
 	}
 }
-void UTriggerComponent::SetMover(UMover* ComingMover)
+void UTriggerComponent::SetMover(TScriptInterface<IIMover> ComingMover)
 {
 	Mover = ComingMover;
 }

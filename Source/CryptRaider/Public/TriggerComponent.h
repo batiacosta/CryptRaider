@@ -22,10 +22,10 @@ protected:
 public:
 	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-	UFUNCTION(BlueprintCallable) void SetMover(UMover* Mover);
+	UFUNCTION(BlueprintCallable) void SetMover(TScriptInterface<IIMover> Mover);
 private:
 	UPROPERTY(EditAnywhere) FName AdmittedTag;
 	AActor* GetAdmittedActor() const;
-	UMover* Mover;
+	TScriptInterface<IIMover> Mover;
 };
 

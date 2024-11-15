@@ -4,11 +4,12 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "IMover.h"
 #include "Mover.generated.h"
 
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class CRYPTRAIDER_API UMover : public UActorComponent
+class CRYPTRAIDER_API UMover : public UActorComponent, public IIMover
 {
 	GENERATED_BODY()
 
@@ -23,7 +24,7 @@ protected:
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-	void SetShouldMove(bool bShouldMove);
+	virtual void SetShouldMove(bool bShouldMove);
 private:
     UPROPERTY(EditAnywhere) FVector MoveOffset;
     
