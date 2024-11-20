@@ -20,6 +20,10 @@ Embark on an exhilarating journey with CryptRaider, a game where your mission is
 
 Developed using Unreal Engine, C++, and Blueprints, this project leverages the Strategy Pattern with Interfaces to ensure future scalability and code expansion, while it implements LODS, line tracing, Enhanced Input, and overlaping events.
 
+You can check the game play video in the following link:
+
+https://youtu.be/q2s5niJRLJY
+
 ### Mechanics 
 
 #### Place the right artifact.
