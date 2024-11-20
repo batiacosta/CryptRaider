@@ -25,6 +25,7 @@ Developed using Unreal Engine, C++, and Blueprints, this project leverages the S
 #### Place the right artifact.
 The crypt has artifacts all over the place. Depending on the level, you can open the door, or discover the secret corridor by placing the right artifact in the right stant. Be careful, you can get trapped if you leave some stands empty.
 Secret corridor behind a movable wall.
+
 ![Moving wall](https://github.com/user-attachments/assets/24112074-f3f2-4744-8f15-2c32f3e8788f)
 
 There are rotating doors that only can be open with the right artifact. Check the scene to look for hints.
